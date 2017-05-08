@@ -9,6 +9,8 @@ Created on Sat May  6 18:18:37 2017
 from __future__ import print_function
 import argparse
 from math import log10
+from os.path import exists, join, basename
+from os import makedirs, remove
 
 import torch
 import torch.nn as nn
@@ -18,11 +20,12 @@ from torch.utils.data import DataLoader
 from model import LasSRN
 from data import get_training_set, get_test_set
 
-# Training settings
-parser = argparse.ArgumentParser(description='PyTorch Super Res Exa')
+# Training settings 
+parser = argparse.ArgumentParser(description='PyTorch LapSRN')
 parser.add_argument('--batchSize', type=int, default=64, help='training batch size')
 parser.add_argument('--testBatchSize', type=int, default=10, help='testing batch size')
 parser.add_argument('--nEpochs', type=int, default=150, help='number of epochs to train for')
+parser.add_argument('--checkpoint', type=str, default='/model', help='Path to checkpoint')
 parser.add_argument('--lr', type=float, default=1e-5, help='Learning Rate. Default=0.01')
 parser.add_argument('--cuda', action='store_true', help='use cuda?')
 parser.add_argument('--threads', type=int, default=4, help='number of threads for data loader to use')
@@ -123,6 +126,8 @@ def test():
 
 
 def checkpoint(epoch):
+    if not exists(opt.checkpoint):
+        makedirs(opt.checkpoint)
     model_out_path = "model/model_epoch_{}.pth".format(epoch)
     torch.save(model, model_out_path)
     print("Checkpoint saved to {}".format(model_out_path))

@@ -7,6 +7,8 @@ Created on Sun May  7 10:07:14 2017
 """
 
 from __future__ import print_function
+from os.path import exists, join, basename
+from os import makedirs, remove
 import argparse
 import torch
 from torch.autograd import Variable
@@ -19,7 +21,7 @@ from pylab import rcParams
 rcParams['figure.figsize'] = 40, 24
 rcParams.update({'font.size': 22})
 # Training settings
-parser = argparse.ArgumentParser(description='PyTorch Super Res Example')
+parser = argparse.ArgumentParser(description='PyTorch LapSRN')
 parser.add_argument('--test_folder', type=str, default='./dataset/BSDS300/images/train', help='input image to use')
 parser.add_argument('--model', type=str, default='model/model_epoch_150.pth', help='model file to use')
 parser.add_argument('--save_folfer', type=str, default='./results', help='input image to use')
@@ -108,7 +110,8 @@ def save_image(HR_2, HR_4, HR_8, GT, name):
     ax.axis("off")
     ax.imshow(GT)
     ax.set_title("GT")
-    
+    if not exists(opt.save_folfer):
+        makedirs(opt.save_folfer)
     fig.savefig(opt.save_folfer+'/'+name+'.png')
     print ('image:'+name+'saved!')
     
