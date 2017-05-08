@@ -8,15 +8,22 @@ A unofficial implementation of paper [Deep Laplacian Pyramid Networks for Fast a
 - Clone this repo:
 
 ```sh
-``` 
+git@github.com:BUPTLdy/Pytorch-LapSRN.git
+```
 
 - Train the model
+```sh
+python train.py --cuda
+```
 
+- Test the model
 
-- Test the model 
+There is a pretrained model in the model folder, you can test the model directly.
+```sh
+python test.py --cuda
+```
 
-
-
+![](./results/8600050.png)
 
 This rough code implementation in order to practice pytorch and there may be some incorrect implementation in the code.
 So the effect of this implementation is not as good as the official implementation.

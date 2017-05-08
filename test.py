@@ -23,7 +23,7 @@ rcParams.update({'font.size': 22})
 # Training settings
 parser = argparse.ArgumentParser(description='PyTorch LapSRN')
 parser.add_argument('--test_folder', type=str, default='./dataset/BSDS300/images/train', help='input image to use')
-parser.add_argument('--model', type=str, default='model/model_epoch_150.pth', help='model file to use')
+parser.add_argument('--model', type=str, default='model/model_epoch_50.pth', help='model file to use')
 parser.add_argument('--save_folfer', type=str, default='./results', help='input image to use')
 parser.add_argument('--output_filename', type=str, help='where to save the output image')
 parser.add_argument('--cuda', action='store_true', help='use cuda')
